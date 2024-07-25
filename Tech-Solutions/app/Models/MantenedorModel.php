@@ -8,32 +8,64 @@ use Illuminate\Database\Eloquent\Model;
 class MantenedorModel extends Model
 {
     use HasFactory;
-    private $id;
-    private $nombre;
-    private $activo;
 
-    publicg function __construct()
+    protected $table = 'mantenedores'; 
+
+    protected $primaryKey = 'id';
+
+    //La clave primaria es un número entero
+    public $incrementing = true;
+
+    // Si la tabla tiene campos de marca de tiempo
+    public $timestamps = false;
+
+    // Definición de campos que son asignables en masa
+    protected $fillable = [
+        'id',
+        'nombre',
+        'activo'
+    ];
+
+    // Métodos para acceder y modificar atributos
+    public function getId()
     {
-        //constructor para instanciar el objeto
+        return $this->attributes['id'];
     }
-    //accesadores - get
-    public function getId(){
-        return $this->id;
+
+    public function setId($id)
+    {
+        $this->attributes['id'] = $id;
     }
-    public function getNombre(){
-        return $this->nombre;
+
+    public function getNombre()
+    {
+        return $this->attributes['nombre'];
     }
-    public function isActivo(){
-        return $this->activo;
+
+    public function setNombre($nombre)
+    {
+        $this->attributes['nombre'] = $nombre;
     }
-    //mutadores - set
-    public function setId($_n){
-        $this->id = $_n;
+
+    public function isActivo()
+    {
+        return $this->attributes['activo'];
     }
-    public function setId($_n){
-        $this->id = $_n;
+
+    public function setActivo($activo)
+    {
+        $this->attributes['activo'] = $activo;
     }
-    public function setActivo($_n){
-        $this->activo = $_n;
+
+    // Métodos estáticos para manejar datos genéricos 
+    public static function getAll()
+    {
+        return self::all();
+    }
+
+    public static function getById($id)
+    {
+        return self::find($id);
     }
 }
+

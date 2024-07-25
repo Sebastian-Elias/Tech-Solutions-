@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\MantenedorModel;
 use Illuminate\Http\Request;
 
-class ControladorCrearProyecto extends Controller
+class MantenedorController  extends Controller
 {
     public function get($_id){
         if ($_id == NULL){
