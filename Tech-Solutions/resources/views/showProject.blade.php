@@ -44,18 +44,12 @@
     @endif
 
                 <!-- Formulario de búsqueda -->
-                <h1>Buscar proyecto por ID</h1>
-<!--     <form action="{{ route('projects.search') }}" method="GET">
-        <label for="search_id">ID:</label>
-        <input type="number" id="search_id" name="search_id" required>
-        <button type="submit">Buscar</button>
-    </form> -->
-
-    <form id="searchForm" method="GET">
-        <label for="search_id">ID:</label>
-        <input type="number" id="search_id" name="search_id" required>
-        <button type="submit">Buscar</button>
-    </form>
+            <h1>Buscar proyecto por ID</h1>
+            <form id="searchForm" method="GET">
+                <label for="search_id">ID:</label>
+                <input type="number" id="search_id" name="search_id" required>
+                <button type="submit">Buscar</button>
+            </form>
 
  <!-- Inserta la URL base en un atributo data -->
 <!--  <script>
@@ -64,9 +58,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('searchForm');
     
     // No es necesario modificar la acción del formulario dinámicamente
-});
+});-->
 
-    </script> -->
+        <!-- Botón para crear un nuevo proyecto -->
+        <h1>Crear Nuevo Proyecto</h1>
+    <a href="{{ route('projects.create') }}">
+        <button type="button">Nuevo Proyecto</button>
+    </a>
+
+    </script> 
     <!-- Inserta la URL base en un atributo data -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
