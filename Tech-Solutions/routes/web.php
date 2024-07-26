@@ -7,6 +7,8 @@ use App\Http\Controllers\GetProjectController;
 use App\Http\Controllers\GetProjectForIdController;
 use App\Http\Controllers\NewProjectController;
 use App\Http\Controllers\UpdateProjectForIdController;
+use Illuminate\Http\Request;
+use App\Models\Proyecto;
 
 
 // Vista principal
@@ -71,7 +73,7 @@ Route::get('/proyectos/{id}/edit', [UpdateProjectForIdController::class, 'edit']
 Route::put('/proyectos/{id}', [UpdateProjectForIdController::class, 'update'])->name('projects.update');
 
 // Ruta para mostrar los detalles de un proyecto
-Route::get('/proyectos/{id}', [UpdateProjectForIdController::class, 'show'])->name('projects.show');
+Route::get('/proyectos/{id}', [GetProjectForIdController::class, 'getById'])->name('projects.show');
 
 // Ruta para mostrar el formulario de eliminación del proyecto
 Route::get('/proyectos/{id}/delete', [DeleteProjectForIdController::class, 'show'])->name('projects.delete.show');
@@ -79,10 +81,15 @@ Route::get('/proyectos/{id}/delete', [DeleteProjectForIdController::class, 'show
 // Ruta para manejar la eliminación del proyecto
 Route::delete('/proyectos/{id}', [DeleteProjectForIdController::class, 'delete'])->name('projects.delete');
 
-// Ruta para obtener un proyecto por ID
-Route::get('/proyectos/{id}/info', [getProjectForIdController::class, 'getById'])->name('projects.show');
-
 // Ruta para manejar la búsqueda de proyectos
-Route::get('/proyectos/search', [GetProjectForIdController::class, 'search'])->name('projects.search');
+// Ruta para manejar la búsqueda de proyectos
+Route::get('/proyectos/search', function (Request $request) {
+    $id = $request->input('search_id');
+    $proyecto = Proyecto::find($id);
 
+    if ($proyecto === null) {
+        return redirect()->route('projects.index')->with('error', 'Proyecto no encontrado');
+    }
 
+    return redirect()->route('projects.show', ['id' => $id]);
+})->name('projects.search');

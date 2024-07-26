@@ -45,11 +45,47 @@
 
                 <!-- Formulario de búsqueda -->
                 <h1>Buscar proyecto por ID</h1>
-    <form action="{{ route('projects.search') }}" method="GET">
+<!--     <form action="{{ route('projects.search') }}" method="GET">
+        <label for="search_id">ID:</label>
+        <input type="number" id="search_id" name="search_id" required>
+        <button type="submit">Buscar</button>
+    </form> -->
+
+    <form id="searchForm" method="GET">
         <label for="search_id">ID:</label>
         <input type="number" id="search_id" name="search_id" required>
         <button type="submit">Buscar</button>
     </form>
+
+ <!-- Inserta la URL base en un atributo data -->
+<!--  <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Obtén el formulario
+    const form = document.getElementById('searchForm');
+    
+    // No es necesario modificar la acción del formulario dinámicamente
+});
+
+    </script> -->
+    <!-- Inserta la URL base en un atributo data -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('searchForm');
+            const searchInput = document.getElementById('search_id');
+
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevenir el envío por defecto
+
+                const searchId = searchInput.value;
+                const actionUrl = `{{ url('/proyectos') }}/${searchId}`;
+
+                // Redirige al usuario a la URL del proyecto
+                window.location.href = actionUrl;
+            });
+        });
+    </script>
+
+
 </body>
 </html>
 

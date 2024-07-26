@@ -53,4 +53,15 @@ class Proyecto extends Model
     {
         File::put(self::$filePath, json_encode($proyectos, JSON_PRETTY_PRINT));
     }
+
+    // Si deseas definir un método 'find' personalizado
+    public static function find($id)
+    {
+        return self::where('id', $id)->first();
+    }
+    
 }
+
+
+
+
